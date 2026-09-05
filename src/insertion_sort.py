@@ -10,6 +10,3 @@ def insertion_sort(A):
 
     return A
 
-numbers = [5, 2, 4, 6, 1]
-
-print(insertion_sort(numbers))
