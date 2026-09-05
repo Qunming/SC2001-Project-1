@@ -10,12 +10,14 @@ The hybrid algorithm uses Merge Sort for larger subarrays and switches to Insert
 
 ## Project Structure
 
+## Project Structure
+
+```text
 SC2001-Project-1/
-│
 ├── src/
 │   ├── merge_sort.py
 │   ├── insertion_sort.py
 │   └── hybrid_sort.py
-│
 ├── README.md
 └── .gitignore
+``` 
