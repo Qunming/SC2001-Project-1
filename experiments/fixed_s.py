@@ -211,6 +211,8 @@ for S in S_values:
 S_values_array = [result[0] for result in results_cii]
 comparison_s_array = [result[1] for result in results_cii]
 
+
+#plot graph of number of key comparisons vs S value
 plt.figure(figsize=(10, 6))
 
 plt.plot(
@@ -228,6 +230,8 @@ plt.tight_layout()
 
 plt.show()
 
+
+#Look for the S value that results in the lowest number of key comparisons
 best_result = min(results_cii, key=lambda result: result[1])
 
 best_S = best_result[0]
@@ -236,3 +240,5 @@ best_comparisons = best_result[1]
 print()
 print(f"Best S value = {best_S}")
 print(f"Lowest number of key comparisons = {best_comparisons:,}")
+
+
