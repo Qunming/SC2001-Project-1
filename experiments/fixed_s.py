@@ -98,14 +98,13 @@ size = [
     70000,
     100000,
     300000,
-    500000
-    # ,
-    # 700000,
-    # 1000000,
-    # 3000000,
-    # 5000000,
-    # 7000000,
-    # 10000000
+    500000,
+    700000,
+    1000000,
+    3000000,
+    5000000,
+    7000000,
+    10000000
 ]
 
 results = []
@@ -231,7 +230,7 @@ plt.tight_layout()
 plt.show()
 
 
-#Look for the S value that results in the lowest number of key comparisons
+#Ciii Look for the S value that results in the lowest number of key comparisons
 best_result = min(results_cii, key=lambda result: result[1])
 
 best_S = best_result[0]
