@@ -83,7 +83,7 @@ def merge(left, right):
 
 
 
-
+#This is part Ci where we run the hybrid sort with a fixed S value of 15 and varying input sizes. We will record the number of key comparisons for each input size and plot the results.
 x = 10000000
 S = 15
 
@@ -98,13 +98,14 @@ size = [
     70000,
     100000,
     300000,
-    500000,
-    700000,
-    1000000,
-    3000000,
-    5000000,
-    7000000,
-    10000000
+    500000
+    # ,
+    # 700000,
+    # 1000000,
+    # 3000000,
+    # 5000000,
+    # 7000000,
+    # 10000000
 ]
 
 results = []
@@ -183,3 +184,55 @@ The theoretical results shows that hybrid merge sort has a time complexity of O(
 The empirical results shows that the number of key comparison increases when the input increases. Overall, the growth of the empirical results is broadly consistent with the theoretical analysis of the hybrid sort. The actual number of comparisons does not exactly match O(nlogn) is expected as Big-O notation describes the asymptotic growth rate rather than the exact numbers of comparison.
 Therefore, the experimental results provide evidence supporting the theoretical conclusion that the hybrid merge sort has a time complexity of O(nlogn)
 """
+
+
+#This is part Cii where we run the hybrid sort with input size n fixed at 10,000,000 and varying S values. We will record the number of key comparisons for each S value and plot the results.
+#Fixed input size n = 10,000,000
+n = 100000
+
+#Generate a list of values for S to be tested
+S_values = [1, 2, 3, 4, 5, 10, 20, 40, 50, 100, 200, 500]
+
+#We will generate the fixed dataset to be experimented on. This ensures that the same dataset is used for each S value, allowing for a fair comparison of the number of key comparisons.
+data = generate_data(n, x)
+
+results_cii = []
+for S in S_values:
+
+    # Create a copy of the original data for each S value
+    testing_data = data.copy()  
+    
+    sorted_data, comparisons = hybrid_sort(testing_data, S)
+
+    results_cii.append((S, comparisons))
+
+    print(f"S = {S}, key comparisons = {comparisons:,}")
+
+S_values_array = [result[0] for result in results_cii]
+comparison_s_array = [result[1] for result in results_cii]
+
+plt.figure(figsize=(10, 6))
+
+plt.plot(
+    S_values_array,
+    comparison_s_array,
+    marker='o'
+)
+
+plt.xlabel("S value")
+plt.ylabel("Number of key comparisons")
+plt.title("Number of Key Comparisons vs S Value")
+
+plt.grid(True)
+plt.tight_layout()
+
+plt.show()
+
+best_result = min(results_cii, key=lambda result: result[1])
+
+best_S = best_result[0]
+best_comparisons = best_result[1]
+
+print()
+print(f"Best S value = {best_S}")
+print(f"Lowest number of key comparisons = {best_comparisons:,}")
