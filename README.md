@@ -1,122 +1,146 @@
-## Expected End Product
+# SC2001 Project 1 — Integration of Mergesort & Insertion Sort
 
-The completed project should contain a working implementation and experimental analysis of:
+This project implements and analyses a hybrid sorting algorithm that combines Mergesort with Insertion Sort.
 
-1. Standard Merge Sort
-2. Insertion Sort
-3. Hybrid Merge Sort + Insertion Sort
+For small subarrays, the overhead of repeated recursive Mergesort calls can reduce efficiency. The hybrid algorithm therefore uses a threshold value `S`:
 
-The hybrid algorithm should use a threshold value `S`:
-
-- If the current subarray size is greater than `S`, continue using Merge Sort.
+- If the current subarray size is greater than `S`, continue using Mergesort.
 - If the current subarray size is less than or equal to `S`, switch to Insertion Sort.
 
-### Final Project Structure
+The project studies how input size `n` and threshold `S` affect the number of key comparisons and overall performance.
+
+## Assignment Requirements
+
+### (a) Hybrid Algorithm
+
+Implement the hybrid Mergesort–Insertion Sort algorithm using a threshold `S`.
+
+### (b) Input Data Generation
+
+Generate random integer arrays with input sizes ranging from 1,000 to 10,000,000.
+
+Each integer is generated in the range `[1, x]`, where `x` is the maximum allowed integer value.
+
+### (c) Time Complexity Analysis
+
+#### (i) Fixed `S`, varying `n`
+
+Run the hybrid algorithm with a fixed threshold while increasing input size `n`.
+
+Record and plot the number of key comparisons against `n`, then compare the empirical results with the theoretical time complexity.
+
+Current implementation uses:
 
 ```text
-SC2001-Project-1/
-├── src/
-│   ├── merge_sort.py
-│   ├── insertion_sort.py
-│   └── hybrid_sort.py
-│
-├── experiments/
-│   ├── vary_n.py
-│   ├── vary_s.py
-│   └── final_comparison.py
-│
-├── results/
-│   ├── data/
-│   └── graphs/
-│
-├── README.md
-└── .gitignore
+S = 15
+n = 1,000 ... 10,000,000
 ```
 
-### Program Requirements
+The empirical results are compared against the expected `O(n log n)` growth.
 
-The final implementation should be able to:
+#### (ii) Fixed `n`, varying `S`
 
-- Sort an array correctly using standard Merge Sort.
-- Sort an array correctly using Insertion Sort.
-- Sort an array using the hybrid Merge Sort + Insertion Sort algorithm.
-- Allow the threshold value `S` to be changed.
-- Count the number of key comparisons performed.
-- Measure CPU execution time where required.
-
-### Experiments
-
-The final project should include the following experiments.
-
-#### 1. Fixed `S`, Different Input Sizes `n`
-
-Keep `S` constant while increasing the size of the input array.
-
-Record:
-
-- Input size `n`
-- Threshold `S`
-- Number of key comparisons
-
-Plot:
+Keep `n` fixed while testing different threshold values:
 
 ```text
-x-axis: Input size n
-y-axis: Number of key comparisons
+S = 1, 2, 3, 4, 5, 10, 20, 40, 50, 100, 200, 500
 ```
 
-Compare the experimental results with the theoretical time complexity.
+The same generated dataset is copied for every value of `S` so that the comparison is fair.
 
-#### 2. Fixed `n`, Different Values of `S`
+The number of key comparisons is plotted against `S`.
 
-Keep the input size `n` constant while changing `S`.
+#### (iii) Determine an optimal `S`
 
-Record:
+Use different input dataset sizes to study which value or range of values of `S` gives the best performance.
 
-- Input size `n`
-- Threshold `S`
-- Number of key comparisons
+**Status: In progress.**
 
-Plot:
+The current code can identify the value of `S` with the lowest number of key comparisons for one fixed input size. The next step is to repeat this experiment across multiple input sizes before selecting an overall optimal threshold.
 
-```text
-x-axis: Threshold S
-y-axis: Number of key comparisons
-```
+### (d) Hybrid Sort vs Original Mergesort
 
-Compare the experimental results with the theoretical analysis.
-
-#### 3. Determine an Optimal `S`
-
-Test different values of `S` using different input sizes.
-
-Use the experimental results to investigate which value or range of values of `S` gives the best performance.
-
-#### 4. Hybrid Sort vs Standard Merge Sort
-
-Using a dataset containing 10 million integers, compare:
+Using a dataset containing 10,000,000 integers, compare:
 
 ```text
-Standard Merge Sort
+Original Mergesort
 vs
-Hybrid Merge Sort + Insertion Sort
+Hybrid Mergesort + Insertion Sort
 ```
 
-Compare both algorithms using:
+The comparison must include:
 
 - Number of key comparisons
 - CPU execution time
 
-The hybrid algorithm should use the selected optimal value of `S`.
+The hybrid algorithm should use the optimal value of `S` obtained from Part (c).
 
-### Final Results
+**Status: To be implemented.**
 
-The completed project should therefore produce:
+## Current Experiment
 
-- Correctly sorted datasets
-- Key-comparison counts
-- CPU-time measurements
-- Graph of key comparisons against input size `n`
-- Graph of key comparisons against threshold `S`
-- Analysis of an optimal `S`
-- Final comparison between standard Merge Sort and the hybrid algorithm
+The main experiment file is:
+
+```text
+experiments/
+└── fixed_s.py
+```
+
+`fixed_s.py` currently contains:
+
+- Random dataset generation
+- Insertion Sort
+- Hybrid Mergesort
+- Merge operation
+- Key-comparison counting
+- Part C(i): fixed `S`, varying `n`
+- Empirical vs theoretical `O(n log n)` comparison
+- Part C(ii): fixed `n`, varying `S`
+- Preliminary search for the best `S`
+
+## Key Comparisons
+
+A key comparison is a comparison between values from the input array.
+
+For example, Insertion Sort counts:
+
+```python
+A[j] > A[j + 1]
+```
+
+and the merge operation counts:
+
+```python
+left[i] <= right[j]
+```
+
+Loop-control and index checks are not counted as key comparisons.
+
+## Running the Experiment
+
+From the project root directory:
+
+```bash
+python experiments/fixed_s.py
+```
+
+Install Matplotlib if required:
+
+```bash
+pip install matplotlib
+```
+
+## Current Progress
+
+| Task | Status |
+|---|---|
+| Hybrid algorithm implementation | Completed |
+| Random input generation | Completed |
+| Key-comparison counting | Completed |
+| C(i): Fixed `S`, varying `n` | Completed |
+| C(i): Empirical vs theoretical analysis | Completed |
+| C(ii): Fixed `n`, varying `S` | Implemented |
+| C(ii): Theoretical analysis | In progress |
+| C(iii): Optimal `S` using different `n` | In progress |
+| Part (d): Hybrid vs original Mergesort | To do |
+| Part (d): CPU-time comparison | To do |
