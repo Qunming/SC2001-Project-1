@@ -20,10 +20,10 @@ def insertion_sort(A):
     return A, comparisons
 
 
+if __name__ == "__main__":
+    numbers = [8, 3, 2, 9, 1, 2, 0, 1, 3, 10, -2, 77, 22, 34, 93]
 
-numbers = [8, 3, 2, 9, 1, 2, 0, 1, 3, 10, -2, 77, 22, 34, 93]
+    sorted_numbers, comparisons = insertion_sort(numbers)
 
-sorted_numbers, comparisons = insertion_sort(numbers)
-
-print("Sorted:", sorted_numbers)
-print("Number of key comparisons =", comparisons)
+    print("Sorted:", sorted_numbers)
+    print("Number of key comparisons =", comparisons)
