@@ -1,4 +1,7 @@
-from src.insertion_sort import insertion_sort
+if __package__:
+    from .insertion_sort import insertion_sort
+else:
+    from insertion_sort import insertion_sort
 
 
 def hybrid_sort(A, S=7):
