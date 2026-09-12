@@ -186,7 +186,7 @@ Therefore, the experimental results provide evidence supporting the theoretical 
 
 
 #This is part Cii where we run the hybrid sort with input size n fixed at 10,000,000 and varying S values. We will record the number of key comparisons for each S value and plot the results.
-#Fixed input size n = 10,000,000
+#Fixed input size n = 100,000   
 n = 100000
 
 #Generate a list of values for S to be tested
@@ -230,7 +230,10 @@ plt.tight_layout()
 plt.show()
 
 
+
 #Ciii Look for the S value that results in the lowest number of key comparisons
+
+"""
 best_result = min(results_cii, key=lambda result: result[1])
 
 best_S = best_result[0]
@@ -239,5 +242,126 @@ best_comparisons = best_result[1]
 print()
 print(f"Best S value = {best_S}")
 print(f"Lowest number of key comparisons = {best_comparisons:,}")
+"""
 
 
+# =========================================================
+# Part C(iii)
+# Test different input sizes to study the optimal S value
+# =========================================================
+
+n_values_ciii = [
+    10000,
+    100000,
+    1000000
+]
+
+S_values_ciii = [
+    1, 2, 3, 4, 5,
+    6, 7, 8, 9, 10,
+    12, 15, 20, 25, 30
+]
+
+results_ciii = []
+
+for n_test in n_values_ciii:
+
+    print()
+    print(f"Testing n = {n_test:,}")
+
+    data = generate_data(n_test, x)
+
+    for S_test in S_values_ciii:
+
+        testing_data = data.copy()
+
+        sorted_data, comparisons = hybrid_sort(
+            testing_data,
+            S_test
+        )
+
+        results_ciii.append(
+            (
+                n_test,
+                S_test,
+                comparisons
+            )
+        )
+
+        print(
+            f"n = {n_test:,}, "
+            f"S = {S_test}, "
+            f"comparisons = {comparisons:,}"
+        )
+
+
+print()
+print("Best S value for each input size")
+
+best_S_results = []
+
+for n_test in n_values_ciii:
+
+    results_for_n = [
+        result
+        for result in results_ciii
+        if result[0] == n_test
+    ]
+
+    best_result = min(
+        results_for_n,
+        key=lambda result: result[2]
+    )
+
+    best_n = best_result[0]
+    best_S = best_result[1]
+    best_comparisons = best_result[2]
+
+    best_S_results.append(
+        (
+            best_n,
+            best_S,
+            best_comparisons
+        )
+    )
+
+    print(
+        f"n = {best_n:,}, "
+        f"best S = {best_S}, "
+        f"comparisons = {best_comparisons:,}"
+    )
+
+
+plt.figure(figsize=(10, 6))
+
+for n_test in n_values_ciii:
+
+    S_for_n = []
+    comparisons_for_n = []
+
+    for result in results_ciii:
+
+        if result[0] == n_test:
+
+            S_for_n.append(result[1])
+            comparisons_for_n.append(result[2])
+
+    plt.plot(
+        S_for_n,
+        comparisons_for_n,
+        marker='o',
+        label=f"n = {n_test:,}"
+    )
+
+plt.xlabel("S value")
+plt.ylabel("Number of key comparisons")
+plt.title(
+    "Number of Key Comparisons vs S "
+    "for Different Input Sizes"
+)
+
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+plt.show()
