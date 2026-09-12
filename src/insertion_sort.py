@@ -21,7 +21,6 @@ def insertion_sort(A):
 
 
 
-
 numbers = [8, 3, 2, 9, 1, 2, 0, 1, 3, 10, -2, 77, 22, 34, 93]
 
 sorted_numbers, comparisons = insertion_sort(numbers)
