@@ -129,18 +129,3 @@ Install Matplotlib if required:
 ```bash
 pip install matplotlib
 ```
-
-## Current Progress
-
-| Task | Status |
-|---|---|
-| Hybrid algorithm implementation | Completed |
-| Random input generation | Completed |
-| Key-comparison counting | Completed |
-| C(i): Fixed `S`, varying `n` | Completed |
-| C(i): Empirical vs theoretical analysis | Completed |
-| C(ii): Fixed `n`, varying `S` | Implemented |
-| C(ii): Theoretical analysis | In progress |
-| C(iii): Optimal `S` using different `n` | In progress |
-| Part (d): Hybrid vs original Mergesort | To do |
-| Part (d): CPU-time comparison | To do |
