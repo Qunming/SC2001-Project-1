@@ -1,6 +1,16 @@
 import math
 import random
+import sys
+from pathlib import Path
+
 import matplotlib.pyplot as plt
+
+# When this file is run directly (for example through VS Code Code Runner),
+# Python places the experiments folder on sys.path instead of the project root.
+# Add the project root so that the src package can be imported reliably.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.hybrid_sort import hybrid_sort
 from src.merge_sort import merge_sort
